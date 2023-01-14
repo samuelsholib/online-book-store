@@ -1,21 +1,27 @@
 import express from "express";
+import Hotel from "../models/hotelsModel.js"
 
 const router = express.Router();
 
-
 //Routes 
+
 //GetRoute
-router.get("/get", (req, res) => {
-
+router.get("/getHotel", (req, res) => {
+    res.send("Hello, Here are lists of luxurious hotels!");
 })
-//getALL
-router.get("/getAll", (req, res) => {
-    
-})
-
 //PostRoute
-router.post("/addNew", (req, res) => {
-    
+router.post("/addNew", async (req, res) => {
+
+    const newHotel = new Hotel(req.body) 
+
+   try {
+    const savedHotel = await newHotel.save()
+    res.status(200).json(savedHotel);
+
+   } catch (err){
+    res.status(500).json(err)
+
+   }
 })
 //DeleteRoute
 router.delete("/delete", (req, res) => {

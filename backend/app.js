@@ -26,6 +26,7 @@ mongoose.connection.on("disconnected", () => {
 
 
 // Middlewares
+app.use(express.json())
 
 app.use("/auth", authRoutes);
 app.use("/rooms", roomRoutes);
